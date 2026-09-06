@@ -1,0 +1,45 @@
+
+nav{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--bg-soft);
+    border-top: 2px solid var(--bg-lite);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+nav h3{
+    cursor: pointer;
+}
+
+nav .tabs{
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.tabs .tab{
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    padding: 12px;
+    background: transparent;
+    border-radius: 8px;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.tab:hover{
+    background: var(--bg-lite);
+}
+
+.active.tab{
+    color: var(--text);
+    background: var(--bg);
+}

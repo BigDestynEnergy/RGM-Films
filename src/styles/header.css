@@ -1,0 +1,47 @@
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-soft);
+    border-bottom: 2px solid var(--bg-lite);
+    justify-content: space-between;
+    z-index: 4;
+}
+
+header h1{
+    cursor: pointer;
+    transition: color .3s ease;
+}
+
+header h1:hover{
+    color: var(--text-dark);
+}
+
+.query{
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 2px solid var(--bg-lite);
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.query input{
+    width: 100%;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+}
+
+.query .icon{
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.icon:hover{
+    color: var(--text-dark);
+}

@@ -1,0 +1,39 @@
+.popup{
+    position: fixed;
+    right: 18px;
+    top: 40px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 4px;
+    padding: 8px;
+    animation: enter .3s ease forwards;
+    max-width: 240px;
+}
+
+
+.overlay{
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay .card{
+    background: var(--bg-lite);
+    padding: 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.overlay .card p{
+    border: 4px solid transparent;
+    border-top: 4px solid var(--text);
+    padding: 12px;
+    border-radius: 20px;
+    animation: rotate .4s linear infinite;
+}

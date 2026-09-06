@@ -7,6 +7,9 @@
     --text-soft: #f0efef;
     --text-lite: #e2dfdf;
     --text-dark: #777;
+
+    --accent: #808;
+    --accent-soft: #790379;
 }
 
 @keyframes rotate{
@@ -20,5 +23,23 @@
     }
     to{
         opacity: 1; transform: translateX(0px);
+    }
+}
+
+@keyframes up{
+    from{
+        opacity: 0; transform: translateY(4px);
+    }
+    to{
+        opacity: 1; transform: translateY(0px);
+    }
+}
+
+@keyframes down{
+    from{
+        opacity: 0; transform: translateY(-10px);
+    }
+    to{
+        opacity: 1; transform: translateY(0px);
     }
 }

@@ -1,0 +1,163 @@
+.movie{
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0px 1px 3px var(--bg-soft);
+    transition: all .3s ease;
+    height: fit-content;
+}
+
+.movie:hover{
+    transform: translateY(-4px);
+    box-shadow: 0px 1px 8px var(--bg-soft);
+}
+
+.movie:hover .image img{
+    transform: scale(1.09);
+}
+
+.movie:hover .play{
+    display: flex;
+}
+
+
+.movie .meta{
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.meta span{
+    font-size: 12px;
+    background: var(--text-dark);
+    padding: 4px;
+    border-radius: 4px;
+    color: var(--text-lite);
+}
+
+.meta button{
+    border: 0;
+    padding: 6px;
+    background: transparent;
+    backdrop-filter: blur(2px);
+    box-shadow: 0px 1px 3px #111;
+    border-radius: 18px;
+    color: var(--text);
+}
+
+.meta button::before{
+    content: attr(data-title);
+    display: none;
+    transition: all .3s ease;
+}
+
+.meta button:hover{
+    background: #dd0000;
+}
+
+.meta button:hover::before{
+    display: inline;
+}
+.image{
+    object-fit: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.image .play{
+    position: absolute;
+    bottom: 10px;
+    background: var(--accent);
+    right: 10px;
+    padding: 12px;
+    border-radius: 20px;
+    align-items: center;
+    cursor: pointer;
+    animation: up .3s ease;
+    display: none;
+}
+
+.play::before{
+    content: attr(data-title);
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    background: var(--bg-soft);
+    animation: up .3s ease forwards;
+    border-radius: 4px;
+    white-space: nowrap;
+    display: none;
+}
+
+.play:hover::before{
+    display: block;
+}
+
+.image .play svg{
+    font-size: 1.1rem;
+}
+
+.image img{
+    height: 100%;
+    width: 100%;
+    transition: transform .3s ease;
+}
+
+.movie .info{
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.info h3{
+    color: var(--accent);
+}
+
+.info .release{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.info .overview{
+    padding: 8px;
+    font-size: 14px;
+    color: var(--text-lite);
+}
+
+.low{
+    margin: 0 auto;
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.movie hr{
+    margin: 0 auto;
+    width: 90%;
+    border: 1px solid var(--text-dark);
+}
+
+.views, .download, .language{
+    transition: color .3s ease;
+    cursor: pointer;
+}
+
+.views:hover, .download:hover, .language:hover{
+    color: var(--text-lite);
+}

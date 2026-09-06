@@ -1,25 +1,23 @@
-import { BrowserRouter } from "react-router"
-import "./App.css"
-import Application from "./Routes/Application"
-import { LoadingProvider } from "./contexts/LoadingProv"
-import Provider from "./contexts/provider"
-import { PopupProvider } from "./contexts/PopupProvider"
+import { BrowserRouter } from 'react-router-dom'
+import './App.css'
+import Application from './routes/Application'
+import { PopupProvider } from './context/PopupProvider'
+import { LoadingProvider } from './context/LoadingContext'
+import { MoviesProvider } from './context/Fetch'
 
 export default function App(){
   return(
     <div className="app">
-
-      <LoadingProvider>
-      <BrowserRouter>
       <PopupProvider>
-      <Provider>
-        
+        <BrowserRouter>
+        <LoadingProvider>
+          <MoviesProvider>
       <Application/>
-    
-      </Provider>
-      </PopupProvider>
-      </BrowserRouter>
+      </MoviesProvider>
       </LoadingProvider>
+      </BrowserRouter>
+      </PopupProvider>
+
     </div>
   )
 }

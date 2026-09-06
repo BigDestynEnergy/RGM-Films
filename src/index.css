@@ -11,3 +11,14 @@ body{
   color: var(--text);
   background: var(--bg);
 }
+
+input, button{
+  transition: all .3s ease;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+button{
+  cursor: pointer;
+}
