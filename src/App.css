@@ -1,0 +1,24 @@
+:root{
+    --bg: #121212;
+    --bg-soft: #222222;
+    --bg-lite: #333;
+
+    --text: #fff;
+    --text-soft: #f0efef;
+    --text-lite: #e2dfdf;
+    --text-dark: #777;
+}
+
+@keyframes rotate{
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+}
+
+@keyframes enter{
+    from{
+        opacity: 0; transform: translateX(10px);
+    }
+    to{
+        opacity: 1; transform: translateX(0px);
+    }
+}
