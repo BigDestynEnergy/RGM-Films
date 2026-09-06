@@ -15,6 +15,7 @@ header{
 header h1{
     cursor: pointer;
     transition: color .3s ease;
+    font-size: clamp(1.3em, 1.6em, 1.8em);
 }
 
 header h1:hover{
@@ -44,4 +45,10 @@ header h1:hover{
 
 .icon:hover{
     color: var(--text-dark);
+}
+
+@media (max-width: 992px){
+    .query{
+        padding: 8px;
+    }
 }

@@ -23,7 +23,7 @@
 }
 
 .empty-overlay button:hover{
-    background: var(--bg-soft);
+    color: #ccc;
 }
 
 .empty-overlay button:active{
