@@ -10,7 +10,7 @@ export default function Header(){
     const redirect = () => nav("/");
     return(
         <header>
-            <h1 onClick={redirect}>RMG Films</h1>
+            <h1 onClick={redirect}>RMG</h1>
 
             <div className="query">
                 <input type="text" placeholder="Find movies here..." value={query}
