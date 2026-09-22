@@ -79,32 +79,42 @@ export default function MovieFull() {
 
       </div>
 
-      <div className="cast">
+     <div className="cast">
+  {cast[id]?.length > 0 ? (
+    cast[id].map((cm) => (
+      <div
+        className="cast-card"
+        key={cm.id}
+        onClick={(e) => {    
+          e.stopPropagation();
 
-        {cast[id]?.map((cm) => (
+          if (cm.id) {
+          window.open(
+  `https://www.google.com/search?q=${encodeURIComponent(cm.name)}`,
+  "_blank",
+  "noopener,noreferrer"
+);
+          }
+        }}
+      >
+        {cm.profile_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500${cm.profile_path}`}
+            alt={cm.name}
+          />
+        ) : (
+          <div className="no-image">No image</div>
+        )}
 
-          <div className="cast-card" key={cm.id}>
-
-            {cm.profile_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w500${cm.profile_path}`}
-                alt={cm.name}
-              />
-            ) : (
-              <div className="no-image">
-                No image
-              </div>
-            )}
-
-            <h3>{cm.name}</h3>
-
-            <p>{cm.character}</p>
-
-          </div>
-
-        ))}
-
+        <h3>{cm.name}</h3>
+        <p>{cm.character}</p>
       </div>
+    ))
+  ) : (
+    <p>No cast information available.</p>
+  )}
+</div>
+
 
     </div>
   );
