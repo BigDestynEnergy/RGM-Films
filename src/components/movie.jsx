@@ -1,13 +1,17 @@
 import { LuDownload, LuLanguages, LuPlay } from "react-icons/lu"
 import "../styles/movie.css"
 import { useMovies } from "../context/Fetch"
+import { useNavigate } from "react-router-dom";
 
 export default function Movie({film}){
  
     const {addToWatchlist} = useMovies();
 
+    const nav = useNavigate();
+    const refer = () => nav(`/movie/${film.id}`);
+
     return(
-        <div className="movie">
+        <div className="movie" onClick={refer}>
             <div className="meta">
                 <span>{film.adult ? "Rated R" : "PG-13"}</span>
                 <button
@@ -18,7 +22,7 @@ export default function Movie({film}){
 
             <div className="image">
                 <img src={`https://image.tmdb.org/t/p/w500${film.poster_path}`} alt={film.title} />
-                <div className="play" data-title={`Play "${film.title}"`}>
+                <div className="play" data-title={`Play "${film.title} ${film.release_date.split("-")[0]}"`}>
                     <LuPlay/>
                 </div>
             </div>

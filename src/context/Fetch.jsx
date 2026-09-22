@@ -9,6 +9,7 @@ export const MoviesProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [getQuery, setGetQuery] = useState("");
   const [watchlist, setWatchlist] = useState([]);
+  const [cast, setCast] = useState({});
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -17,6 +18,7 @@ export const MoviesProvider = ({ children }) => {
 
   const token = import.meta.env.VITE_KEY;
 
+  
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -30,7 +32,7 @@ export const MoviesProvider = ({ children }) => {
           ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
               query
             )}&language=en-US&page=${page}`
-          : `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`
+          : `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
 
         const response = await fetch(url, {
           headers: {
@@ -58,62 +60,103 @@ export const MoviesProvider = ({ children }) => {
     fetchMovies();
   }, [getQuery, page]);
 
-  useEffect(()=>{
+  
+  useEffect(() => {
     const timer = setTimeout(() => {
       setGetQuery(query);
+      setPage(1);
     }, 800);
 
     return () => clearTimeout(timer);
   }, [query]);
 
-  const addToWatchlist = (film) => {
-  setWatchlist((prev) => {
-    const exists = prev.some((movie) => movie.id === film.id);
 
-    if (exists) {
-      return prev.filter((movie) => movie.id !== film.id);
+  const fetchCast = async (movieId) => {
+    try {
+      if (!token) {
+        throw new Error("TMDB API token is missing.");
+      }
+
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`TMDB API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      setCast((prev) => ({
+        ...prev,
+        [movieId]: data.cast || [],
+      }));
+
+      return data.cast || [];
+    } catch (error) {
+      console.error("Error fetching cast:", error);
+      notify("Could not load movie cast");
+      return [];
     }
+  };
 
-    return [...prev, { ...film, liked: true }];
-  });
+  const addToWatchlist = (film) => {
+    setWatchlist((prev) => {
+      const exists = prev.some((movie) => movie.id === film.id);
 
-  setMovies((prev) =>
-    prev.map((movie) =>
-      movie.id === film.id
-        ? { ...movie, liked: !movie.liked }
-        : movie
-    )
-  );
-};
+      if (exists) {
+        return prev.filter((movie) => movie.id !== film.id);
+      }
 
-const nextPage = () => {
-  setPage((prev) => Math.min(prev + 1, totalPages))
-}
+      return [...prev, { ...film, liked: true }];
+    });
 
-const previousPage = () => {
-  setPage((prev) => Math.min(prev - 1))
-}
+    setMovies((prev) =>
+      prev.map((movie) =>
+        movie.id === film.id
+          ? { ...movie, liked: !movie.liked }
+          : movie
+      )
+    );
+  };
 
+  const nextPage = () => {
+    setPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  const previousPage = () => {
+    if (page === 1) return;
+
+    setPage((prev) => prev - 1);
+  };
 
   return (
-   <Context.Provider
-  value={{
-    movies,
-    setQuery,
-    query,
-    
-    watchlist,
-    addToWatchlist,
+    <Context.Provider
+      value={{
+        movies,
+        setQuery,
+        query,
 
-      page,
+        watchlist,
+        addToWatchlist,
+
+        cast,
+        fetchCast,
+
+        page,
         totalPages,
         nextPage,
         previousPage,
-  }}
->
-  {children}
-</Context.Provider>
-
+      }}
+    >
+      {children}
+    </Context.Provider>
   );
 };
 
